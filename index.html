@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap" rel="stylesheet">
+    <style>
+        body {
+            color: var(--orange);
+            font-family: 'Finger Paint', cursive;
+            text-align: center;
+            margin: 50px;
+            color:#110b27;
+            background-color: #462d87;
+        }
+        button {
+            background-color: yellowgreen;
+            border-radius: 24px;
+            border:none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Finger Paint', cursive;
+            margin-top: 12px;
+            color: rgb(16, 16, 114);
+        }
+        #result, #number-board {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Finger Paint', cursive;
+            color:green
+        }
+        #number-board {
+            display: grid;
+            grid-template-columns: repeat(6, 40px);
+            grid-gap: 10px;
+            justify-content: center;
+        }
+        .number-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #140732;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .selected {
+            background-color: #67450d;
+            color: white;
+        }
+    </style>
+    <title>Lottery Game</title>
+</head>
+<body>
+    <h1>Lottery Game</h1>
+    <div id="number-board">
+        <div class="number-box" id="num1" onclick="toggleNumber(1)">1</div>
+        <div class="number-box" id="num2" onclick="toggleNumber(2)">2</div>
+        <div class="number-box" id="num3" onclick="toggleNumber(3)">3</div>
+        <div class="number-box" id="num4" onclick="toggleNumber(4)">4</div>
+        <div class="number-box" id="num5" onclick="toggleNumber(5)">5</div>
+        <div class="number-box" id="num6" onclick="toggleNumber(6)">6</div>
+        <div class="number-box" id="num7" onclick="toggleNumber(7)">7</div>
+        <div class="number-box" id="num8" onclick="toggleNumber(8)">8</div>
+        <div class="number-box" id="num9" onclick="toggleNumber(9)">9</div>
+        <div class="number-box" id="num10" onclick="toggleNumber(10)">10</div>
+        <div class="number-box" id="num11" onclick="toggleNumber(11)">11</div>
+        <div class="number-box" id="num12" onclick="toggleNumber(12)">12</div>
+        <div class="number-box" id="num13" onclick="toggleNumber(13)">13</div>
+        <div class="number-box" id="num14" onclick="toggleNumber(14)">14</div>
+        <div class="number-box" id="num15" onclick="toggleNumber(15)">15</div>
+        <div class="number-box" id="num16" onclick="toggleNumber(16)">16</div>
+        <div class="number-box" id="num17" onclick="toggleNumber(17)">17</div>
+        <div class="number-box" id="num18" onclick="toggleNumber(18)">18</div>
+        <div class="number-box" id="num19" onclick="toggleNumber(19)">19</div>
+        <div class="number-box" id="num20" onclick="toggleNumber(20)">20</div>
+        <div class="number-box" id="num21" onclick="toggleNumber(21)">21</div>
+        <div class="number-box" id="num22" onclick="toggleNumber(22)">22</div>
+        <div class="number-box" id="num23" onclick="toggleNumber(23)">23</div>
+        <div class="number-box" id="num24" onclick="toggleNumber(24)">24</div>
+        <div class="number-box" id="num25" onclick="toggleNumber(25)">25</div>
+        <div class="number-box" id="num26" onclick="toggleNumber(26)">26</div>
+        <div class="number-box" id="num27" onclick="toggleNumber(27)">27</div>
+        <div class="number-box" id="num28" onclick="toggleNumber(28)">28</div>
+        <div class="number-box" id="num29" onclick="toggleNumber(29)">29</div>
+        <div class="number-box" id="num30" onclick="toggleNumber(30)">30</div>
+        <div class="number-box" id="num31" onclick="toggleNumber(31)">31</div>
+        <div class="number-box" id="num32" onclick="toggleNumber(32)">32</div>
+        <div class="number-box" id="num33" onclick="toggleNumber(33)">33</div>
+        <div class="number-box" id="num34" onclick="toggleNumber(34)">34</div>
+        <div class="number-box" id="num35" onclick="toggleNumber(35)">35</div>
+        <div class="number-box" id="num36" onclick="toggleNumber(36)">36</div>
+    </div>
+    <button onclick="generateNumbers()">Generate Numbers</button>
+    <div id="result"></div>
+
+    <script>
+      // ცვლადი მომხმარებლის მიერ შერჩეული ნომრების შესანახად
+var selectedNumbers = [];
+
+// ფუნქცია რიცხვის შერჩეეული მდგომარეობის გადართვისთვის/გასარკვევად
+function toggleNumber(number) {
+    // შევამოწმოთ თუ ნომერი უკვე არჩეულია
+    var isSelected = selectedNumbers.includes(number);
+
+    if (isSelected) {
+        // თუ ნომერი უკვე არჩეულია, გააუქმეთ ის
+        for (var i = 0; i < selectedNumbers.length; i++) {
+            if (selectedNumbers[i] === number) {
+                selectedNumbers.splice(i, 1); // წავშალოთ ნომერი მასივიდან
+                break;
+            }
+        }
+    } else if (selectedNumbers.length < 6) {
+        // თუ  არჩეულია 6 რიცხვზე ნაკლები, დავამატთ ნომერი
+        selectedNumbers.push(number);
+    }
+
+    // არჩეული ნომრების განახლება დაფაზე
+    updateNumberBoard();
+}
+
+// Function to update the display of selected numbers on the board
+function updateNumberBoard() {
+    var numberBoxes = document.querySelectorAll('.number-box');
+
+    for (var i = 0; i < numberBoxes.length; i++) {
+        var number = i + 1; // რიცხვები იწყება 1-დან
+        var box = numberBoxes[i];
+
+        var isSelected = selectedNumbers.includes(number);
+
+        if (isSelected) {
+            box.classList.add('selected'); // Add 'selected' class for styling
+        } else {
+            box.classList.remove('selected'); // Remove 'selected' class
+        }
+    }
+}
+
+// Function to generate random numbers and check for matches with selected numbers
+function generateNumbers() {
+    document.getElementById('result').innerHTML = ''; // Clear previous result
+
+    // Array to store randomly generated numbers
+    var generatedNumbers = [];
+
+    // Generate 6 unique random numbers between 1 and 36
+    while (generatedNumbers.length < 6) {
+        var randomNum = Math.floor(Math.random() * 36) + 1;
+
+        if (!generatedNumbers.includes(randomNum)) {
+            generatedNumbers.push(randomNum);
+        }
+    }
+
+    // დამთხვევა  შერჩეულ და გენერირებულ რიცხვებს შორის
+    //SelectedNumbers: ეს არის მასივი, რომელიც შეიცავს მომხმარებლის მიერ არჩეულ რიცხვებს.
+    //GeneratedNumbers: ეს არის მასივი, რომელიც შეიცავს შემთხვევით გენერირებულ რიცხვებს.
+    //ფილტრის ფუნქცია არის მასივის მეთოდი JavaScript-ში.
+    //შერჩეული Numbers მასივის თითოეული ელემენტისთვის შესრულებულია გამოძახების ფუნქცია.
+    //გამოძახების ფუნქცია არგუმენტად იღებს მიმდინარე ელემენტს (ამ შემთხვევაში, ეს არის num).
+    // ის ფილტრავს ნომრებს შერჩეული ნომრებიდან, რომლებიც არ არის გენერირებული რიცხვებში.
+    // ანუ, ამ კოდის შესრულების შემდეგ, matchingNumbers იქნება მასივი
+    // რომელიც შეიცავს მომხმარებლის მიერ არჩეულ რიცხვებს, რომლებიც ასევე ემთხვევა შემთხვევით გენერირებულ რიცხვებს.
+    // ეს არსებითად ქმნის selectNumbers-ის ქვეჯგუფს, რომელიც მოიცავს მხოლოდ იმ ციფრებს,
+    // რომლებიც წარმოდგენილია როგორც selectNumbers-ში, ისე გენერირებულიNumbers-ში.
+    // შემდეგ ეს მასივი გამოიყენება კოდის მომდევნო ნაწილში შესაბამისი ნომრების საჩვენებლად.
+    var matchingNumbers = selectedNumbers.filter(function (num) {
+        return generatedNumbers.includes(num);
+    });
+
+    // Display the result in the HTML
+    var resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = '<p>Generated Numbers: ' + generatedNumbers.join(', ') + '</p>';
+    resultDiv.innerHTML += '<p>Your Selected Numbers: ' + selectedNumbers.join(', ') + '</p>';
+
+    if (matchingNumbers.length > 0) {
+        resultDiv.innerHTML += '<p>Matching Numbers: ' + matchingNumbers.join(', ') + '</p>';
+    } else {
+        resultDiv.innerHTML += '<p>No Matching Numbers</p>';
+    }
+}
+
+    </script>
+</body>
+</html>
